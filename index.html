@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rio Celeste Jungle Glamping — Where the Jungle Meets Luxury</title>
+  <meta name="description" content="Luxury geodesic dome glamping in the heart of Costa Rica's jungle. 1 mile from Tenorio Volcano National Park. Book your wild escape today." />
+  <meta property="og:title" content="Rio Celeste Jungle Glamping" />
+  <meta property="og:description" content="Geodesic dome glamping in Costa Rica's most magical jungle." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            jungle: '#1B4332',
+            clay: '#8B5E3C',
+            celeste: '#48CAE4',
+            cream: '#F5EFE6',
+            forest: '#0D1B0E',
+            leaf: '#A8D5A2',
+            'jungle-mid': '#2D6A4F',
+            'jungle-light': '#52B788',
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background-color: #F5EFE6; color: #0D1B0E; margin: 0; }
+
+    /* Floating leaves animation */
+    @keyframes floatLeaf {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      50% { transform: translateY(-30px) rotate(15deg); opacity: 1; }
+      100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    }
+    @keyframes floatLeaf2 {
+      0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0.5; }
+      33% { transform: translateY(-20px) rotate(-10deg) translateX(10px); opacity: 0.9; }
+      66% { transform: translateY(-40px) rotate(20deg) translateX(-5px); opacity: 0.6; }
+      100% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0.5; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(72,202,228,0.4); }
+      50% { box-shadow: 0 0 20px 8px rgba(72,202,228,0.2); }
+    }
+
+    .leaf { position: absolute; font-size: 2rem; animation: floatLeaf 6s ease-in-out infinite; pointer-events: none; }
+    .leaf:nth-child(2) { animation: floatLeaf2 8s ease-in-out infinite; }
+    .leaf:nth-child(3) { animation: floatLeaf 5s ease-in-out infinite 1s; }
+    .leaf:nth-child(4) { animation: floatLeaf2 7s ease-in-out infinite 2s; }
+    .leaf:nth-child(5) { animation: floatLeaf 9s ease-in-out infinite 3s; }
+
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Nav */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: background 0.4s, box-shadow 0.4s; }
+    #navbar.scrolled { background: #1B4332; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+    #navbar.top { background: transparent; }
+
+    .nav-link { color: #F5EFE6; text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.05em; transition: color 0.2s; }
+    .nav-link:hover { color: #48CAE4; }
+
+    /* Hero */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #0D1B0E 0%, #1B4332 25%, #2D6A4F 50%, #1B4332 70%, #0D1B0E 100%);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(72,202,228,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(139,94,60,0.2) 0%, transparent 50%);
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+      background: linear-gradient(to bottom, transparent, #F5EFE6);
+      pointer-events: none;
+    }
+
+    /* Wave dividers */
+    .wave-top svg { display: block; }
+    .wave-bottom svg { display: block; }
+
+    /* Accommodation cards */
+    .accom-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(27,67,50,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .accom-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(27,67,50,0.25), 0 0 0 2px rgba(72,202,228,0.3);
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      columns: 3;
+      column-gap: 12px;
+    }
+    @media (max-width: 768px) { .gallery-grid { columns: 2; } }
+    @media (max-width: 480px) { .gallery-grid { columns: 1; } }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(13,27,14,0.7);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-thumb {
+      width: 100%;
+      display: block;
+    }
+
+    /* Form */
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #A8D5A2;
+      border-radius: 8px;
+      background: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: #48CAE4;
+      box-shadow: 0 0 0 3px rgba(72,202,228,0.2);
+    }
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #1B4332;
+      margin-bottom: 0.375rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* Language switcher */
+    .lang-btn { background: none; border: none; color: #F5EFE6; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 4px 6px; border-radius: 4px; transition: background 0.2s; letter-spacing: 0.05em; }
+    .lang-btn:hover, .lang-btn.active { background: rgba(72,202,228,0.25); color: #48CAE4; }
+    .lang-btn.active { color: #48CAE4; }
+    .lang-sep { color: rgba(245,239,230,0.4); font-size: 0.8rem; }
+
+    /* CTA button */
+    .btn-primary {
+      background: #48CAE4;
+      color: #0D1B0E;
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      animation: pulse-glow 3s infinite;
+    }
+    .btn-primary:hover { background: #00B4D8; transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: #F5EFE6;
+      font-weight: 600;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      border: 2px solid #F5EFE6;
+      cursor: pointer;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-outline:hover { background: rgba(245,239,230,0.15); transform: translateY(-2px); }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* Experience cards */
+    .exp-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: background 0.3s, transform 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .exp-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-4px); }
+
+    /* Testimonial cards */
+    .testi-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(27,67,50,0.08);
+      position: relative;
+    }
+    .testi-card::before {
+      content: '"';
+      position: absolute; top: 1rem; left: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: #A8D5A2;
+      line-height: 1;
+    }
+
+    /* Stat boxes */
+    .stat-box {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: #1B4332; }
+    .stat-label { font-size: 0.875rem; color: #8B5E3C; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    @media (max-width: 768px) {
+      .hide-mobile { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ NAVBAR ═══════════════════════════════════════ -->
+<nav id="navbar" class="top">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-2 no-underline">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="24" r="11" stroke="#48CAE4" stroke-width="1.5" fill="none"/>
+        <path d="M7 24 L18 7 L29 24" stroke="#48CAE4" stroke-width="1.5" fill="none"/>
+        <path d="M11 24 L18 11 L25 24" stroke="#A8D5A2" stroke-width="1" fill="none"/>
+        <path d="M14 24 L18 15 L22 24" stroke="#A8D5A2" stroke-width="0.8" fill="none"/>
+        <path d="M7 24 L29 24" stroke="#48CAE4" stroke-width="1.5"/>
+        <path d="M18 36 Q14 30 18 26 Q22 30 18 36" fill="#A8D5A2" opacity="0.8"/>
+      </svg>
+      <div>
+        <div style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:#F5EFE6; line-height:1.1;">Rio Celeste</div>
+        <div style="font-size:0.6rem; color:#A8D5A2; letter-spacing:0.15em; text-transform:uppercase; font-weight:600;">Jungle Glamping</div>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#about" class="nav-link" data-i18n="nav_about">About</a>
+      <a href="#accommodations" class="nav-link" data-i18n="nav_accom">Accommodations</a>
+      <a href="#experiences" class="nav-link" data-i18n="nav_exp">Experiences</a>
+      <a href="#location" class="nav-link" data-i18n="nav_loc">Location</a>
+      <a href="#gallery" class="nav-link" data-i18n="nav_gallery">Gallery</a>
+      <a href="#booking" class="btn-primary text-sm py-2 px-5" data-i18n="nav_book">Book Now</a>
+    </div>
+
+    <!-- Language switcher -->
+    <div class="hidden md:flex items-center gap-1">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="md:hidden text-cream" onclick="toggleMobile()" style="color:#F5EFE6; background:none; border:none; cursor:pointer; font-size:1.5rem;">☰</button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" style="background:#1B4332; padding:1rem 1.5rem 1.5rem;">
+    <div class="flex flex-col gap-3">
+      <a href="#about" class="nav-link" onclick="toggleMobile()" data-i18n="nav_about">About</a>
+      <a href="#accommodations" class="nav-link" onclick="toggleMobile()" data-i18n="nav_accom">Accommodations</a>
+      <a href="#experiences" class="nav-link" onclick="toggleMobile()" data-i18n="nav_exp">Experiences</a>
+      <a href="#location" class="nav-link" onclick="toggleMobile()" data-i18n="nav_loc">Location</a>
+      <a href="#gallery" class="nav-link" onclick="toggleMobile()" data-i18n="nav_gallery">Gallery</a>
+      <a href="#booking" class="btn-primary text-center mt-2" onclick="toggleMobile()" data-i18n="nav_book">Book Now</a>
+      <div class="flex gap-2 mt-2">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" onclick="setLang('es')">ES</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" onclick="setLang('de')">DE</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<section id="hero">
+  <!-- Floating leaves -->
+  <span class="leaf" style="top:15%;left:8%;">🌿</span>
+  <span class="leaf" style="top:25%;right:10%;">🍃</span>
+  <span class="leaf" style="top:60%;left:5%;">🌿</span>
+  <span class="leaf" style="top:70%;right:15%;">🍃</span>
+  <span class="leaf" style="top:40%;left:80%;">🌱</span>
+
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+    <!-- Badge -->
+    <div style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(72,202,228,0.2); border:1px solid rgba(72,202,228,0.4); border-radius:50px; padding:0.4rem 1rem; margin-bottom:2rem;">
+      <span style="color:#48CAE4; font-size:0.85rem; font-weight:600;" data-i18n="hero_badge">🏔️ 1 mile from Tenorio Volcano National Park</span>
+    </div>
+
+    <h1 style="font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,5rem); font-weight:900; color:#F5EFE6; line-height:1.1; margin-bottom:1.5rem;" data-i18n="hero_headline">
+      Where the Jungle<br/><em>Meets Luxury</em>
+    </h1>
+    <p style="color:rgba(245,239,230,0.85); font-size:clamp(1rem,2vw,1.25rem); max-width:600px; margin:0 auto 2.5rem; line-height:1.7;" data-i18n="hero_sub">
+      Geodesic dome glamping in the heart of Costa Rica's most magical jungle — Rio Celeste, toucans, and a sky full of stars.
+    </p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="#accommodations" class="btn-outline" data-i18n="hero_cta1">Explore Domes</a>
+      <a href="#booking" class="btn-primary" data-i18n="hero_cta2">Book Your Stay</a>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div style="margin-top:-2px; background:#F5EFE6;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:60px;">
+    <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#0D1B0E" opacity="0.08"/>
+    <path d="M0,40 C480,10 960,60 1440,20 L1440,60 L0,60 Z" fill="#F5EFE6"/>
+  </svg>
+</div>
+
+<!-- ═══════════════════════════════════════ ABOUT ═══════════════════════════════════════ -->
+<section id="about" style="background:#F5EFE6; padding:6rem 1.5rem;">
+  <div class="max-w-6xl mx-auto">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;" class="fade-in">
+      <!-- Text -->
+      <div>
+        <p style="color:#8B5E3C; font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem;" data-i18n="about_label">Our Story</p>
+        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#1B4332; line-height:1.15; margin-bottom:1.5rem;" data-i18n="about_headline">A Different Kind of Wild</h2>
+        <p style="color:#3d3d3d; line-height:1.8; font-size:1.05rem; margin-bottom:1rem;" data-i18n="about_p1">
+          Nestled in the lush jungles of northern Costa Rica, Rio Celeste Jungle Glamping was born from one simple belief: that luxury and nature aren't opposites — they're partners.
+        </p>
+        <p style="color:#3d3d3d; line-height:1.8; font-size:1.05rem; margin-bottom:2rem;" data-i18n="about_p2">
+          Wake up to toucans calling, fall asleep to the jungle orchestra. Spend your days riding horses through the canopy, tubing the legendary blue river, and hiking trails that few tourists ever see. Come home to your geodesic dome — spacious, stylish, and impossibly comfortable.
+        </p>
+        <a href="#booking" class="btn-primary" data-i18n="about_cta">Plan Your Escape</a>
+      </div>
+
+      <!-- Visual panel -->
+      <div style="position:relative;">
+        <div style="background:linear-gradient(135deg,#1B4332,#2D6A4F,#52B788); border-radius:24px; padding:3rem 2rem; color:#F5EFE6; text-align:center;">
+          <div style="font-size:5rem; margin-bottom:1rem;">🌿</div>
+          <div style="font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">"La naturaleza es lujo"</div>
+          <div style="color:#A8D5A2; font-size:0.9rem; margin-bottom:2rem;">Nature is luxury</div>
+          <!-- Stat row -->
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; border-top:1px solid rgba(255,255,255,0.15); padding-top:2rem;">
+            <div class="stat-box" style="padding:0.5rem;">
+              <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:#48CAE4;" data-i18n="stat1_num">3</div>
+              <div style="font-size:0.7rem; color:#A8D5A2; text-transform:uppercase; letter-spacing:0.1em;" data-i18n="stat1_label">Unique Stays</div>
+            </div>
+            <div class="stat-box" style="padding:0.5rem;">
+              <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:#48CAE4;" data-i18n="stat2_num">100+</div>
+              <div style="font-size:0.7rem; color:#A8D5A2; text-transform:uppercase; letter-spacing:0.1em;" data-i18n="stat2_label">Bird Species</div>
+            </div>
+            <div class="stat-box" style="padding:0.5rem;">
+              <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:#48CAE4;" data-i18n="stat3_num">0</div>
+              <div style="font-size:0.7rem; color:#A8D5A2; text-transform:uppercase; letter-spacing:0.1em;" data-i18n="stat3_label">Compromises</div>
+            </div>
+          </div>
+        </div>
+        <!-- Decorative floating badge -->
+        <div style="position:absolute; top:-20px; right:-20px; background:#48CAE4; color:#0D1B0E; border-radius:50%; width:80px; height:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-weight:800; font-size:0.7rem; text-align:center; box-shadow:0 8px 24px rgba(72,202,228,0.4);">
+          <div style="font-size:1.2rem;">🐦</div>
+          <div>Toucan<br/>Country</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:60px; background:#F5EFE6;">
+  <path d="M0,0 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#0D1B0E"/>
+</svg>
+
+<!-- ═══════════════════════════════════════ ACCOMMODATIONS ═══════════════════════════════════════ -->
+<section id="accommodations" style="background:#0D1B0E; padding:6rem 1.5rem;">
+  <div class="max-w-6xl mx-auto">
+    <div class="fade-in" style="text-align:center; margin-bottom:4rem;">
+      <p style="color:#A8D5A2; font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem;" data-i18n="accom_label">Where You'll Sleep</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#F5EFE6;" data-i18n="accom_headline">Your Home in the Jungle</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem;">
+
+      <!-- Dome Deluxe -->
+      <div class="accom-card fade-in">
+        <div style="background:linear-gradient(135deg,#1B4332,#48CAE4); height:200px; display:flex; align-items:center; justify-content:center; font-size:5rem; position:relative;">
+          ⛺
+          <div style="position:absolute;top:1rem;right:1rem;background:#48CAE4;color:#0D1B0E;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.75rem;font-weight:700;">From $180/night</div>
+        </div>
+        <div style="padding:1.75rem;">
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:#1B4332; margin-bottom:0.25rem;" data-i18n="dome1_name">Dome Deluxe</h3>
+          <p style="color:#8B5E3C; font-size:0.8rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:1rem;">8 Meter Geodesic Dome · 2 Available</p>
+          <p style="color:#555; line-height:1.7; font-size:0.95rem; margin-bottom:1.25rem;" data-i18n="dome1_desc">The ultimate romantic retreat. Immerse yourself in jungle luxury with a king bed, private deck, and views that will take your breath away.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.5rem;">
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">👑 King Bed</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">🌿 Private Deck</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">❄️ A/C</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">🚿 En-Suite Bath</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">🍾 Minibar</span>
+          </div>
+          <a href="#booking" class="btn-primary" style="width:100%;text-align:center;" data-i18n="accom_cta">Check Availability</a>
+        </div>
+      </div>
+
+      <!-- Dome Explorer -->
+      <div class="accom-card fade-in">
+        <div style="background:linear-gradient(135deg,#2D6A4F,#8B5E3C); height:200px; display:flex; align-items:center; justify-content:center; font-size:5rem; position:relative;">
+          🏕️
+          <div style="position:absolute;top:1rem;right:1rem;background:#48CAE4;color:#0D1B0E;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.75rem;font-weight:700;">From $140/night</div>
+        </div>
+        <div style="padding:1.75rem;">
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:#1B4332; margin-bottom:0.25rem;" data-i18n="dome2_name">Dome Explorer</h3>
+          <p style="color:#8B5E3C; font-size:0.8rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:1rem;">6 Meter Geodesic Dome · 1 Available</p>
+          <p style="color:#555; line-height:1.7; font-size:0.95rem; margin-bottom:1.25rem;" data-i18n="dome2_desc">Your jungle office. Fast WiFi, a dedicated workspace, and queen comfort — perfect for digital nomads who refuse to miss out on adventure.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.5rem;">
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">🛏️ Queen Bed</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">💻 Workspace</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">⚡ Fast WiFi</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">🚿 En-Suite Bath</span>
+          </div>
+          <a href="#booking" class="btn-primary" style="width:100%;text-align:center;" data-i18n="accom_cta">Check Availability</a>
+        </div>
+      </div>
+
+      <!-- Cabin -->
+      <div class="accom-card fade-in">
+        <div style="background:linear-gradient(135deg,#8B5E3C,#52B788); height:200px; display:flex; align-items:center; justify-content:center; font-size:5rem; position:relative;">
+          🏡
+          <div style="position:absolute;top:1rem;right:1rem;background:#48CAE4;color:#0D1B0E;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.75rem;font-weight:700;">From $220/night</div>
+          <div style="position:absolute;top:1rem;left:1rem;background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.75rem;font-weight:700;">♿ ADA</div>
+        </div>
+        <div style="padding:1.75rem;">
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:#1B4332; margin-bottom:0.25rem;" data-i18n="cabin_name">The Jungle Cabin</h3>
+          <p style="color:#8B5E3C; font-size:0.8rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:1rem;">1 Bedroom · ADA Compliant · Families</p>
+          <p style="color:#555; line-height:1.7; font-size:0.95rem; margin-bottom:1.25rem;" data-i18n="cabin_desc">A full home in the jungle. Complete with a living room, full kitchen, accessible bathroom, and a private porch with mountain views — built for families who want real comfort.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.5rem;">
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">🛋️ Living Room</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">🍳 Full Kitchen</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">🏔️ Mountain Views</span>
+            <span style="background:#F5EFE6;color:#1B4332;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;">♿ Accessible</span>
+          </div>
+          <a href="#booking" class="btn-primary" style="width:100%;text-align:center;" data-i18n="accom_cta">Check Availability</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:60px;background:#0D1B0E;">
+  <path d="M0,60 C480,0 960,60 1440,10 L1440,60 L0,60 Z" fill="#1B4332"/>
+</svg>
+
+<!-- ═══════════════════════════════════════ EXPERIENCES ═══════════════════════════════════════ -->
+<section id="experiences" style="background:#1B4332; padding:6rem 1.5rem; position:relative; overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;opacity:0.05;font-size:8rem;display:flex;flex-wrap:wrap;gap:2rem;align-items:center;justify-content:center;pointer-events:none;">
+    🌿🍃🌿🍃🌿🍃🌿🍃🌿🍃🌿🍃
+  </div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="fade-in" style="text-align:center; margin-bottom:4rem;">
+      <p style="color:#A8D5A2; font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem;" data-i18n="exp_label">Things To Do</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#F5EFE6;" data-i18n="exp_headline">Adventures Await</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem;">
+      <div class="exp-card fade-in">
+        <div style="font-size:3rem; margin-bottom:1rem;">🐴</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:#F5EFE6; font-weight:700; margin-bottom:0.5rem;" data-i18n="exp1_title">Horseback Riding</h3>
+        <p style="color:rgba(245,239,230,0.75); font-size:0.9rem; line-height:1.7;" data-i18n="exp1_desc">Ride through the jungle canopy on guided horseback tours that wind down to the legendary Rio Celeste river.</p>
+      </div>
+      <div class="exp-card fade-in">
+        <div style="font-size:3rem; margin-bottom:1rem;">🚣</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:#F5EFE6; font-weight:700; margin-bottom:0.5rem;" data-i18n="exp2_title">River Tubing</h3>
+        <p style="color:rgba(245,239,230,0.75); font-size:0.9rem; line-height:1.7;" data-i18n="exp2_desc">Float down the turquoise waters of Rio Celeste on an exhilarating tubing adventure unlike anything else on earth.</p>
+      </div>
+      <div class="exp-card fade-in">
+        <div style="font-size:3rem; margin-bottom:1rem;">🥾</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:#F5EFE6; font-weight:700; margin-bottom:0.5rem;" data-i18n="exp3_title">Jungle Hiking</h3>
+        <p style="color:rgba(245,239,230,0.75); font-size:0.9rem; line-height:1.7;" data-i18n="exp3_desc">Trek through ancient jungle trails with local guides, discovering hidden waterfalls, exotic plants, and breathtaking river views.</p>
+      </div>
+      <div class="exp-card fade-in">
+        <div style="font-size:3rem; margin-bottom:1rem;">🐦</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:#F5EFE6; font-weight:700; margin-bottom:0.5rem;" data-i18n="exp4_title">Wildlife Watching</h3>
+        <p style="color:rgba(245,239,230,0.75); font-size:0.9rem; line-height:1.7;" data-i18n="exp4_desc">Spot toucans, scarlet macaws, howler monkeys, and over 100 bird species right from your dome or on guided wildlife walks.</p>
+      </div>
+      <div class="exp-card fade-in">
+        <div style="font-size:3rem; margin-bottom:1rem;">🏊</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:#F5EFE6; font-weight:700; margin-bottom:0.5rem;" data-i18n="exp5_title">River Swimming</h3>
+        <p style="color:rgba(245,239,230,0.75); font-size:0.9rem; line-height:1.7;" data-i18n="exp5_desc">Swim in the iconic turquoise waters of Rio Celeste — one of the world's most uniquely colored rivers, just minutes away.</p>
+      </div>
+      <div class="exp-card fade-in">
+        <div style="font-size:3rem; margin-bottom:1rem;">🍽️</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:#F5EFE6; font-weight:700; margin-bottom:0.5rem;" data-i18n="exp6_title">Local Cuisine</h3>
+        <p style="color:rgba(245,239,230,0.75); font-size:0.9rem; line-height:1.7;" data-i18n="exp6_desc">Explore the many local restaurants nearby, serving fresh Costa Rican cuisine, tropical fruits, and the best casados you'll ever taste.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:60px;background:#1B4332;">
+  <path d="M0,10 C360,60 1080,0 1440,50 L1440,60 L0,60 Z" fill="#F5EFE6"/>
+</svg>
+
+<!-- ═══════════════════════════════════════ LOCATION ═══════════════════════════════════════ -->
+<section id="location" style="background:#F5EFE6; padding:6rem 1.5rem;">
+  <div class="max-w-6xl mx-auto">
+    <div class="fade-in" style="text-align:center; margin-bottom:4rem;">
+      <p style="color:#8B5E3C; font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem;" data-i18n="loc_label">Find Us</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#1B4332;" data-i18n="loc_headline">In the Heart of It All</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;" class="fade-in">
+      <!-- Map placeholder -->
+      <div style="background:linear-gradient(135deg,#1B4332,#2D6A4F); border-radius:20px; padding:3rem; text-align:center; color:#F5EFE6; min-height:300px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+        <div style="position:absolute;inset:0;opacity:0.1;font-size:6rem;display:flex;align-items:center;justify-content:center;">🗺️</div>
+        <div style="font-size:3rem; margin-bottom:1rem;">📍</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">Rio Celeste Area</h3>
+        <p style="color:#A8D5A2; margin-bottom:0.5rem;">Guanacaste, Costa Rica</p>
+        <p style="color:rgba(245,239,230,0.6); font-size:0.85rem; margin-bottom:2rem;">10.7°N 85.0°W</p>
+        <a href="https://maps.google.com/?q=10.7,-85.0" target="_blank" class="btn-primary" data-i18n="loc_cta">Get Directions →</a>
+      </div>
+
+      <!-- Highlights -->
+      <div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:#1B4332; margin-bottom:2rem;" data-i18n="loc_highlights">Why the Location is Magic</h3>
+        <div style="display:flex; flex-direction:column; gap:1.25rem;">
+          <div style="display:flex; align-items:flex-start; gap:1rem;">
+            <span style="font-size:1.5rem; flex-shrink:0;">🏔️</span>
+            <div>
+              <strong style="color:#1B4332;" data-i18n="loc_p1_title">Tenorio Volcano National Park</strong>
+              <p style="color:#555; font-size:0.9rem; margin:0.25rem 0 0;" data-i18n="loc_p1_desc">Just 1 mile away — home of Rio Celeste's famous blue waterfall and pristine hiking trails.</p>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:1rem;">
+            <span style="font-size:1.5rem; flex-shrink:0;">💧</span>
+            <div>
+              <strong style="color:#1B4332;" data-i18n="loc_p2_title">Rio Celeste River</strong>
+              <p style="color:#555; font-size:0.9rem; margin:0.25rem 0 0;" data-i18n="loc_p2_desc">The world-famous turquoise river is just minutes from your dome. Swim in nature's most magical colors.</p>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:1rem;">
+            <span style="font-size:1.5rem; flex-shrink:0;">🌿</span>
+            <div>
+              <strong style="color:#1B4332;" data-i18n="loc_p3_title">Deep Jungle Setting</strong>
+              <p style="color:#555; font-size:0.9rem; margin:0.25rem 0 0;" data-i18n="loc_p3_desc">Surrounded by primary rainforest with stunning mountain views, abundant wildlife, and absolute tranquility.</p>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:1rem;">
+            <span style="font-size:1.5rem; flex-shrink:0;">🍽️</span>
+            <div>
+              <strong style="color:#1B4332;" data-i18n="loc_p4_title">Local Restaurants Nearby</strong>
+              <p style="color:#555; font-size:0.9rem; margin:0.25rem 0 0;" data-i18n="loc_p4_desc">Multiple great local restaurants are within a short drive, serving authentic Costa Rican flavors.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:60px;background:#F5EFE6;">
+  <path d="M0,0 C720,60 720,0 1440,40 L1440,60 L0,60 Z" fill="#0D1B0E"/>
+</svg>
+
+<!-- ═══════════════════════════════════════ GALLERY ═══════════════════════════════════════ -->
+<section id="gallery" style="background:#0D1B0E; padding:6rem 1.5rem;">
+  <div class="max-w-6xl mx-auto">
+    <div class="fade-in" style="text-align:center; margin-bottom:4rem;">
+      <p style="color:#A8D5A2; font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem;" data-i18n="gallery_label">Visual Journey</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#F5EFE6;" data-i18n="gallery_headline">See the Magic</h2>
+    </div>
+
+    <div class="gallery-grid fade-in">
+      <div class="gallery-item" style="height:220px; background:linear-gradient(135deg,#F4A261,#E76F51,#1B4332);">
+        <div class="gallery-overlay"><span style="color:#F5EFE6;font-weight:700;font-size:0.9rem;letter-spacing:0.05em;" data-i18n="g1">Dome at Sunrise</span></div>
+      </div>
+      <div class="gallery-item" style="height:280px; background:linear-gradient(135deg,#48CAE4,#00B4D8,#023E8A);">
+        <div class="gallery-overlay"><span style="color:#F5EFE6;font-weight:700;font-size:0.9rem;" data-i18n="g2">Rio Celeste River</span></div>
+      </div>
+      <div class="gallery-item" style="height:200px; background:linear-gradient(135deg,#1B4332,#52B788,#2D6A4F);">
+        <div class="gallery-overlay"><span style="color:#F5EFE6;font-weight:700;font-size:0.9rem;" data-i18n="g3">Jungle Canopy</span></div>
+      </div>
+      <div class="gallery-item" style="height:240px; background:linear-gradient(135deg,#ADB5BD,#6C757D,#1B4332);">
+        <div class="gallery-overlay"><span style="color:#F5EFE6;font-weight:700;font-size:0.9rem;" data-i18n="g4">Morning Mist</span></div>
+      </div>
+      <div class="gallery-item" style="height:200px; background:linear-gradient(135deg,#8B5E3C,#D4A373,#52B788);">
+        <div class="gallery-overlay"><span style="color:#F5EFE6;font-weight:700;font-size:0.9rem;" data-i18n="g5">Wildlife</span></div>
+      </div>
+      <div class="gallery-item" style="height:260px; background:linear-gradient(135deg,#264653,#2A9D8F,#E9C46A);">
+        <div class="gallery-overlay"><span style="color:#F5EFE6;font-weight:700;font-size:0.9rem;" data-i18n="g6">Mountain View</span></div>
+      </div>
+      <div class="gallery-item" style="height:220px; background:linear-gradient(135deg,#8B5E3C,#A8D5A2,#1B4332);">
+        <div class="gallery-overlay"><span style="color:#F5EFE6;font-weight:700;font-size:0.9rem;" data-i18n="g7">The Cabin</span></div>
+      </div>
+      <div class="gallery-item" style="height:180px; background:linear-gradient(135deg,#0D1B0E,#2C3E50,#4A0E8F);">
+        <div class="gallery-overlay"><span style="color:#F5EFE6;font-weight:700;font-size:0.9rem;" data-i18n="g8">Stargazing</span></div>
+      </div>
+      <div class="gallery-item" style="height:240px; background:linear-gradient(135deg,#52B788,#F4A261,#1B4332);">
+        <div class="gallery-overlay"><span style="color:#F5EFE6;font-weight:700;font-size:0.9rem;" data-i18n="g9">Local Adventure</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:60px;background:#0D1B0E;">
+  <path d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="#F5EFE6"/>
+</svg>
+
+<!-- ═══════════════════════════════════════ TESTIMONIALS ═══════════════════════════════════════ -->
+<section style="background:#F5EFE6; padding:6rem 1.5rem;">
+  <div class="max-w-6xl mx-auto">
+    <div class="fade-in" style="text-align:center; margin-bottom:4rem;">
+      <p style="color:#8B5E3C; font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem;" data-i18n="testi_label">Guest Voices</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#1B4332;" data-i18n="testi_headline">What Guests Are Saying</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem;">
+      <div class="testi-card fade-in">
+        <div style="padding-top:3rem;">
+          <p style="color:#555; line-height:1.8; font-style:italic; margin-bottom:1.5rem;">"Waking up to toucans outside your geodesic dome with coffee in hand — this is not a vacation, it's a transformation. The most magical place we've ever stayed."</p>
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#48CAE4,#1B4332);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">S</div>
+            <div>
+              <strong style="color:#1B4332; font-size:0.9rem;">Sarah & Mark T. 🇺🇸</strong>
+              <div style="color:#A8D5A2; font-size:0.78rem;">★★★★★ Dome Deluxe</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-in">
+        <div style="padding-top:3rem;">
+          <p style="color:#555; line-height:1.8; font-style:italic; margin-bottom:1.5rem;">"Als Familienurlaub absolut perfekt. Die Kinder liebten das Tubing auf dem Rio Celeste und das Pferdereiten. Das Cabin war komfortabel und barrierefrei. 10 von 10."</p>
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#8B5E3C,#52B788);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">H</div>
+            <div>
+              <strong style="color:#1B4332; font-size:0.9rem;">Familie Müller 🇩🇪</strong>
+              <div style="color:#A8D5A2; font-size:0.78rem;">★★★★★ The Jungle Cabin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-in">
+        <div style="padding-top:3rem;">
+          <p style="color:#555; line-height:1.8; font-style:italic; margin-bottom:1.5rem;">"I worked remotely from the Explorer Dome for two weeks. Best productivity of my life, surrounded by jungle sounds and the most vivid green you've ever seen. Already planning my return."</p>
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2D6A4F,#48CAE4);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">J</div>
+            <div>
+              <strong style="color:#1B4332; font-size:0.9rem;">Jamie L. 🇨🇦</strong>
+              <div style="color:#A8D5A2; font-size:0.78rem;">★★★★★ Dome Explorer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:60px;background:#F5EFE6;">
+  <path d="M0,0 C360,60 1080,0 1440,50 L1440,60 L0,60 Z" fill="#1B4332"/>
+</svg>
+
+<!-- ═══════════════════════════════════════ BOOKING ═══════════════════════════════════════ -->
+<section id="booking" style="background:#1B4332; padding:6rem 1.5rem;">
+  <div class="max-w-3xl mx-auto">
+    <div class="fade-in" style="text-align:center; margin-bottom:3rem;">
+      <p style="color:#A8D5A2; font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem;" data-i18n="book_label">Reserve Your Stay</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#F5EFE6;" data-i18n="book_headline">Start Your Adventure</h2>
+      <p style="color:rgba(245,239,230,0.75); margin-top:1rem;" data-i18n="book_sub">Fill out the form below and we'll confirm your booking within 24 hours.</p>
+    </div>
+
+    <form action="mailto:bookings@riocelestejungleglamping.com" method="post" enctype="text/plain" onsubmit="return validateForm()" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:2.5rem;" class="fade-in">
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+        <div>
+          <label class="form-label" for="fullname" data-i18n="form_name">Full Name *</label>
+          <input type="text" id="fullname" name="fullname" class="form-input" placeholder="Your name" required />
+        </div>
+        <div>
+          <label class="form-label" for="email" data-i18n="form_email">Email Address *</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="you@email.com" required />
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+        <div>
+          <label class="form-label" for="phone" data-i18n="form_phone">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 555 000 0000" />
+        </div>
+        <div>
+          <label class="form-label" for="guests" data-i18n="form_guests">Number of Guests *</label>
+          <input type="number" id="guests" name="guests" class="form-input" placeholder="2" min="1" max="10" required />
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+        <div>
+          <label class="form-label" for="checkin" data-i18n="form_checkin">Check-in Date *</label>
+          <input type="date" id="checkin" name="checkin" class="form-input" required />
+        </div>
+        <div>
+          <label class="form-label" for="checkout" data-i18n="form_checkout">Check-out Date *</label>
+          <input type="date" id="checkout" name="checkout" class="form-input" required />
+        </div>
+      </div>
+
+      <div style="margin-bottom:1.25rem;">
+        <label class="form-label" for="accommodation" data-i18n="form_accom">Preferred Accommodation *</label>
+        <select id="accommodation" name="accommodation" class="form-input" required>
+          <option value="" data-i18n="form_accom_placeholder">Select accommodation...</option>
+          <option value="dome-deluxe" data-i18n="form_opt1">Dome Deluxe (8m) — $180/night</option>
+          <option value="dome-explorer" data-i18n="form_opt2">Dome Explorer (6m) — $140/night</option>
+          <option value="cabin" data-i18n="form_opt3">The Jungle Cabin — $220/night</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:2rem;">
+        <label class="form-label" for="message" data-i18n="form_message">Special Requests or Questions</label>
+        <textarea id="message" name="message" class="form-input" rows="4" placeholder="Tell us anything special — dietary needs, accessibility requirements, celebration plans..." style="resize:vertical;"></textarea>
+      </div>
+
+      <div style="text-align:center;">
+        <button type="submit" class="btn-primary" style="font-size:1.05rem; padding:1rem 3rem;" data-i18n="form_submit">Send Inquiry 🌿</button>
+        <p style="color:rgba(245,239,230,0.5); font-size:0.8rem; margin-top:1rem;" data-i18n="form_note">✓ We respond within 24 hours · No payment required to inquire</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Wave -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:60px;background:#1B4332;">
+  <path d="M0,30 C480,60 960,0 1440,30 L1440,60 L0,60 Z" fill="#0D1B0E"/>
+</svg>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+<footer style="background:#0D1B0E; padding:4rem 1.5rem 2rem; color:#F5EFE6;">
+  <div class="max-w-6xl mx-auto">
+    <div style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; flex-wrap:wrap;">
+
+      <!-- Brand -->
+      <div>
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+          <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="24" r="11" stroke="#48CAE4" stroke-width="1.5" fill="none"/>
+            <path d="M7 24 L18 7 L29 24" stroke="#48CAE4" stroke-width="1.5" fill="none"/>
+            <path d="M11 24 L18 11 L25 24" stroke="#A8D5A2" stroke-width="1" fill="none"/>
+            <path d="M7 24 L29 24" stroke="#48CAE4" stroke-width="1.5"/>
+            <path d="M18 36 Q14 30 18 26 Q22 30 18 36" fill="#A8D5A2" opacity="0.8"/>
+          </svg>
+          <div>
+            <div style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:#F5EFE6;">Rio Celeste</div>
+            <div style="font-size:0.65rem; color:#A8D5A2; letter-spacing:0.15em; text-transform:uppercase;">Jungle Glamping</div>
+          </div>
+        </div>
+        <p style="color:rgba(245,239,230,0.6); font-size:0.9rem; line-height:1.7; max-width:260px;" data-i18n="footer_tagline">Where the jungle meets luxury. Geodesic dome glamping in Costa Rica's most magical corner.</p>
+        <div style="margin-top:1.25rem; display:flex; gap:1rem;">
+          <a href="#" title="Instagram" style="color:#A8D5A2; font-size:1.4rem; text-decoration:none;" title="Instagram">📸</a>
+          <a href="#" title="Facebook" style="color:#A8D5A2; font-size:1.4rem; text-decoration:none;" title="Facebook">👍</a>
+          <a href="#" title="TripAdvisor" style="color:#A8D5A2; font-size:1.4rem; text-decoration:none;" title="TripAdvisor">🌍</a>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h4 style="font-weight:700; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; color:#A8D5A2; margin-bottom:1rem;" data-i18n="footer_nav">Navigation</h4>
+        <div style="display:flex; flex-direction:column; gap:0.6rem;">
+          <a href="#about" class="nav-link" style="font-size:0.9rem;" data-i18n="nav_about">About</a>
+          <a href="#accommodations" class="nav-link" style="font-size:0.9rem;" data-i18n="nav_accom">Accommodations</a>
+          <a href="#experiences" class="nav-link" style="font-size:0.9rem;" data-i18n="nav_exp">Experiences</a>
+          <a href="#location" class="nav-link" style="font-size:0.9rem;" data-i18n="nav_loc">Location</a>
+          <a href="#gallery" class="nav-link" style="font-size:0.9rem;" data-i18n="nav_gallery">Gallery</a>
+          <a href="#booking" class="nav-link" style="font-size:0.9rem;" data-i18n="nav_book">Book Now</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 style="font-weight:700; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; color:#A8D5A2; margin-bottom:1rem;" data-i18n="footer_contact">Contact</h4>
+        <div style="display:flex; flex-direction:column; gap:0.75rem; color:rgba(245,239,230,0.7); font-size:0.9rem;">
+          <div>📧 bookings@<br/>riocelestejungleglamping.com</div>
+          <div>📞 +506 XXXX-XXXX</div>
+          <div>📍 Rio Celeste Area<br/>Guanacaste, Costa Rica</div>
+        </div>
+      </div>
+
+      <!-- Language -->
+      <div>
+        <h4 style="font-weight:700; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; color:#A8D5A2; margin-bottom:1rem;" data-i18n="footer_lang">Language</h4>
+        <div style="display:flex; flex-direction:column; gap:0.5rem;">
+          <button class="lang-btn" onclick="setLang('en')" style="text-align:left;">🇺🇸 English</button>
+          <button class="lang-btn" onclick="setLang('es')" style="text-align:left;">🇨🇷 Español</button>
+          <button class="lang-btn" onclick="setLang('de')" style="text-align:left;">🇩🇪 Deutsch</button>
+          <button class="lang-btn" onclick="setLang('fr')" style="text-align:left;">🇫🇷 Français</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <p style="color:rgba(245,239,230,0.4); font-size:0.8rem;">© 2025 Rio Celeste Jungle Glamping. All rights reserved.</p>
+      <p style="color:rgba(245,239,230,0.4); font-size:0.8rem;">Made with 🌿 in Costa Rica</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════ JAVASCRIPT ═══════════════════════════════════════ -->
+<script>
+// ─── TRANSLATIONS ───
+const translations = {
+  en: {
+    nav_about: 'About', nav_accom: 'Accommodations', nav_exp: 'Experiences',
+    nav_loc: 'Location', nav_gallery: 'Gallery', nav_book: 'Book Now',
+    hero_badge: '🏔️ 1 mile from Tenorio Volcano National Park',
+    hero_headline: 'Where the Jungle<br/><em>Meets Luxury</em>',
+    hero_sub: "Geodesic dome glamping in the heart of Costa Rica's most magical jungle — Rio Celeste, toucans, and a sky full of stars.",
+    hero_cta1: 'Explore Domes', hero_cta2: 'Book Your Stay',
+    about_label: 'Our Story', about_headline: 'A Different Kind of Wild',
+    about_p1: "Nestled in the lush jungles of northern Costa Rica, Rio Celeste Jungle Glamping was born from one simple belief: that luxury and nature aren't opposites — they're partners.",
+    about_p2: "Wake up to toucans calling, fall asleep to the jungle orchestra. Spend your days riding horses through the canopy, tubing the legendary blue river, and hiking trails that few tourists ever see. Come home to your geodesic dome — spacious, stylish, and impossibly comfortable.",
+    about_cta: 'Plan Your Escape',
+    stat1_num: '3', stat1_label: 'Unique Stays', stat2_num: '100+', stat2_label: 'Bird Species', stat3_num: '0', stat3_label: 'Compromises',
+    accom_label: 'Where You\'ll Sleep', accom_headline: 'Your Home in the Jungle', accom_cta: 'Check Availability',
+    dome1_name: 'Dome Deluxe', dome1_desc: 'The ultimate romantic retreat. Immerse yourself in jungle luxury with a king bed, private deck, and views that will take your breath away.',
+    dome2_name: 'Dome Explorer', dome2_desc: 'Your jungle office. Fast WiFi, a dedicated workspace, and queen comfort — perfect for digital nomads who refuse to miss out on adventure.',
+    cabin_name: 'The Jungle Cabin', cabin_desc: 'A full home in the jungle. Complete with a living room, full kitchen, accessible bathroom, and a private porch with mountain views — built for families who want real comfort.',
+    exp_label: 'Things To Do', exp_headline: 'Adventures Await',
+    exp1_title: 'Horseback Riding', exp1_desc: 'Ride through the jungle canopy on guided horseback tours that wind down to the legendary Rio Celeste river.',
+    exp2_title: 'River Tubing', exp2_desc: 'Float down the turquoise waters of Rio Celeste on an exhilarating tubing adventure unlike anything else on earth.',
+    exp3_title: 'Jungle Hiking', exp3_desc: 'Trek through ancient jungle trails with local guides, discovering hidden waterfalls, exotic plants, and breathtaking river views.',
+    exp4_title: 'Wildlife Watching', exp4_desc: 'Spot toucans, scarlet macaws, howler monkeys, and over 100 bird species right from your dome or on guided wildlife walks.',
+    exp5_title: 'River Swimming', exp5_desc: "Swim in the iconic turquoise waters of Rio Celeste — one of the world's most uniquely colored rivers, just minutes away.",
+    exp6_title: 'Local Cuisine', exp6_desc: 'Explore the many local restaurants nearby, serving fresh Costa Rican cuisine, tropical fruits, and the best casados you\'ll ever taste.',
+    loc_label: 'Find Us', loc_headline: 'In the Heart of It All', loc_cta: 'Get Directions →',
+    loc_highlights: 'Why the Location is Magic',
+    loc_p1_title: 'Tenorio Volcano National Park', loc_p1_desc: "Just 1 mile away — home of Rio Celeste's famous blue waterfall and pristine hiking trails.",
+    loc_p2_title: 'Rio Celeste River', loc_p2_desc: "The world-famous turquoise river is just minutes from your dome. Swim in nature's most magical colors.",
+    loc_p3_title: 'Deep Jungle Setting', loc_p3_desc: 'Surrounded by primary rainforest with stunning mountain views, abundant wildlife, and absolute tranquility.',
+    loc_p4_title: 'Local Restaurants Nearby', loc_p4_desc: 'Multiple great local restaurants are within a short drive, serving authentic Costa Rican flavors.',
+    gallery_label: 'Visual Journey', gallery_headline: 'See the Magic',
+    g1:'Dome at Sunrise',g2:'Rio Celeste River',g3:'Jungle Canopy',g4:'Morning Mist',g5:'Wildlife',g6:'Mountain View',g7:'The Cabin',g8:'Stargazing',g9:'Local Adventure',
+    testi_label: 'Guest Voices', testi_headline: 'What Guests Are Saying',
+    book_label: 'Reserve Your Stay', book_headline: 'Start Your Adventure',
+    book_sub: "Fill out the form below and we'll confirm your booking within 24 hours.",
+    form_name:'Full Name *', form_email:'Email Address *', form_phone:'Phone (optional)', form_guests:'Number of Guests *',
+    form_checkin:'Check-in Date *', form_checkout:'Check-out Date *', form_accom:'Preferred Accommodation *',
+    form_accom_placeholder:'Select accommodation...', form_opt1:'Dome Deluxe (8m) — $180/night', form_opt2:'Dome Explorer (6m) — $140/night', form_opt3:'The Jungle Cabin — $220/night',
+    form_message:'Special Requests or Questions', form_submit:'Send Inquiry 🌿', form_note:'✓ We respond within 24 hours · No payment required to inquire',
+    footer_tagline: "Where the jungle meets luxury. Geodesic dome glamping in Costa Rica's most magical corner.",
+    footer_nav:'Navigation', footer_contact:'Contact', footer_lang:'Language',
+  },
+  es: {
+    nav_about: 'Nosotros', nav_accom: 'Alojamientos', nav_exp: 'Experiencias',
+    nav_loc: 'Ubicación', nav_gallery: 'Galería', nav_book: 'Reservar',
+    hero_badge: '🏔️ A 1.6 km del Parque Nacional Volcán Tenorio',
+    hero_headline: 'Donde la Selva<br/><em>Se Encuentra con el Lujo</em>',
+    hero_sub: 'Glamping en domos geodésicos en el corazón de la jungla más mágica de Costa Rica — Río Celeste, tucanes y un cielo lleno de estrellas.',
+    hero_cta1: 'Ver Domos', hero_cta2: 'Reservar Tu Estadía',
+    about_label: 'Nuestra Historia', about_headline: 'Un Tipo Diferente de Salvaje',
+    about_p1: 'Enclavado en las exuberantes selvas del norte de Costa Rica, Rio Celeste Jungle Glamping nació de una simple creencia: que el lujo y la naturaleza no son opuestos, son socios.',
+    about_p2: 'Despierta con el canto de los tucanes, duerme con la orquesta de la jungla. Pasa tus días a caballo por el dosel, flotando en el legendario río azul e iniciando senderos que pocos turistas conocen.',
+    about_cta: 'Planifica Tu Escape',
+    stat1_num: '3', stat1_label: 'Alojamientos Únicos', stat2_num: '100+', stat2_label: 'Especies de Aves', stat3_num: '0', stat3_label: 'Compromisos',
+    accom_label: 'Dónde Dormir', accom_headline: 'Tu Hogar en la Jungla', accom_cta: 'Verificar Disponibilidad',
+    dome1_name: 'Domo Deluxe', dome1_desc: 'El retiro romántico definitivo. Sumérgete en el lujo de la jungla con cama king, terraza privada y vistas impresionantes.',
+    dome2_name: 'Domo Explorer', dome2_desc: 'Tu oficina en la jungla. WiFi rápido, espacio de trabajo y comodidad queen — perfecto para nómadas digitales.',
+    cabin_name: 'La Cabaña Selvática', cabin_desc: 'Un hogar completo en la jungla. Con sala de estar, cocina completa, baño accesible y porche privado con vistas a la montaña.',
+    exp_label: 'Qué Hacer', exp_headline: 'La Aventura Te Espera',
+    exp1_title: 'Paseos a Caballo', exp1_desc: 'Cabalga por el dosel de la jungla en tours guiados que bajan hasta el legendario río Río Celeste.',
+    exp2_title: 'Tubing en el Río', exp2_desc: 'Flota por las aguas turquesas del Río Celeste en una aventura emocionante como ninguna otra en el mundo.',
+    exp3_title: 'Senderismo en la Selva', exp3_desc: 'Recorre senderos ancestrales con guías locales, descubriendo cascadas ocultas y vistas espectaculares.',
+    exp4_title: 'Observación de Vida Silvestre', exp4_desc: 'Avista tucanes, lapas rojas, monos aulladores y más de 100 especies de aves desde tu domo.',
+    exp5_title: 'Natación en el Río', exp5_desc: 'Nada en las icónicas aguas turquesas del Río Celeste — uno de los ríos con colores más únicos del mundo.',
+    exp6_title: 'Gastronomía Local', exp6_desc: 'Explora los muchos restaurantes cercanos con cocina costarricense fresca, frutas tropicales y los mejores casados.',
+    loc_label: 'Encuéntranos', loc_headline: 'En el Corazón de Todo', loc_cta: 'Obtener Direcciones →',
+    loc_highlights: 'Por Qué la Ubicación Es Mágica',
+    loc_p1_title: 'Parque Nacional Volcán Tenorio', loc_p1_desc: 'A solo 1.6 km — hogar de la famosa catarata azul del Río Celeste y senderos prístinos.',
+    loc_p2_title: 'Río Celeste', loc_p2_desc: 'El famoso río turquesa está a minutos de tu domo. Nada en los colores más mágicos de la naturaleza.',
+    loc_p3_title: 'Entorno de Selva Profunda', loc_p3_desc: 'Rodeado de selva primaria con impresionantes vistas a la montaña, abundante vida silvestre y tranquilidad absoluta.',
+    loc_p4_title: 'Restaurantes Locales Cercanos', loc_p4_desc: 'Varios excelentes restaurantes locales a corta distancia en coche con auténticos sabores costarricenses.',
+    gallery_label: 'Viaje Visual', gallery_headline: 'Mira la Magia',
+    g1:'Domo al Amanecer',g2:'Río Celeste',g3:'Dosel de la Selva',g4:'Niebla Matutina',g5:'Vida Silvestre',g6:'Vista a la Montaña',g7:'La Cabaña',g8:'Observación de Estrellas',g9:'Aventura Local',
+    testi_label: 'Voces de Huéspedes', testi_headline: 'Lo Que Dicen Nuestros Huéspedes',
+    book_label: 'Reserva Tu Estadía', book_headline: 'Comienza Tu Aventura',
+    book_sub: 'Completa el formulario y confirmaremos tu reserva en 24 horas.',
+    form_name:'Nombre Completo *', form_email:'Correo Electrónico *', form_phone:'Teléfono (opcional)', form_guests:'Número de Huéspedes *',
+    form_checkin:'Fecha de Entrada *', form_checkout:'Fecha de Salida *', form_accom:'Alojamiento Preferido *',
+    form_accom_placeholder:'Selecciona alojamiento...', form_opt1:'Domo Deluxe (8m) — $180/noche', form_opt2:'Domo Explorer (6m) — $140/noche', form_opt3:'La Cabaña Selvática — $220/noche',
+    form_message:'Solicitudes Especiales o Preguntas', form_submit:'Enviar Consulta 🌿', form_note:'✓ Respondemos en 24 horas · No se requiere pago para consultar',
+    footer_tagline: 'Donde la selva se encuentra con el lujo. Glamping en domos geodésicos en el rincón más mágico de Costa Rica.',
+    footer_nav:'Navegación', footer_contact:'Contacto', footer_lang:'Idioma',
+  },
+  de: {
+    nav_about: 'Über Uns', nav_accom: 'Unterkünfte', nav_exp: 'Erlebnisse',
+    nav_loc: 'Lage', nav_gallery: 'Galerie', nav_book: 'Jetzt Buchen',
+    hero_badge: '🏔️ 1,6 km vom Nationalpark Tenorio-Vulkan entfernt',
+    hero_headline: 'Wo der Dschungel<br/><em>auf Luxus Trifft</em>',
+    hero_sub: 'Geodätisches Dom-Glamping im Herzen des magischsten Dschungels Costa Ricas — Rio Celeste, Tukane und ein Himmel voller Sterne.',
+    hero_cta1: 'Domes Entdecken', hero_cta2: 'Aufenthalt Buchen',
+    about_label: 'Unsere Geschichte', about_headline: 'Eine andere Art von Wildnis',
+    about_p1: 'Eingebettet in die üppigen Dschungel Nordcostaricnas wurde Rio Celeste Jungle Glamping aus einer einfachen Überzeugung geboren: Luxus und Natur sind keine Gegensätze — sie sind Partner.',
+    about_p2: 'Wachen Sie beim Ruf der Tukane auf, schlafen Sie beim Dschungelorchester ein. Verbringen Sie Ihre Tage beim Reiten durch das Blätterdach, beim Tubing auf dem legendären blauen Fluss.',
+    about_cta: 'Urlaub Planen',
+    stat1_num: '3', stat1_label: 'Einzigartige Unterkünfte', stat2_num: '100+', stat2_label: 'Vogelarten', stat3_num: '0', stat3_label: 'Kompromisse',
+    accom_label: 'Wo Sie Schlafen', accom_headline: 'Ihr Zuhause im Dschungel', accom_cta: 'Verfügbarkeit Prüfen',
+    dome1_name: 'Deluxe Dom', dome1_desc: 'Das ultimative romantische Rückzugsort. Tauchen Sie ein in Dschungelluxus mit Kingsize-Bett, Privatterrasse und atemberaubender Aussicht.',
+    dome2_name: 'Explorer Dom', dome2_desc: 'Ihr Büro im Dschungel. Schnelles WLAN, ein eigener Arbeitsbereich und Komfort — perfekt für digitale Nomaden.',
+    cabin_name: 'Die Dschungelhütte', cabin_desc: 'Ein vollständiges Zuhause im Dschungel. Mit Wohnzimmer, Vollküche, barrierefreiem Bad und einer privaten Veranda mit Bergblick.',
+    exp_label: 'Was Man Tun Kann', exp_headline: 'Abenteuer Warten',
+    exp1_title: 'Reiten', exp1_desc: 'Reiten Sie durch das Blätterdach auf geführten Touren, die zum legendären Rio Celeste hinunterführen.',
+    exp2_title: 'Flusstubing', exp2_desc: 'Treiben Sie auf dem türkisfarbenen Wasser des Rio Celeste auf einem aufregenden Tubing-Abenteuer.',
+    exp3_title: 'Dschungelwandern', exp3_desc: 'Wandern Sie durch uralte Dschungelpfade mit einheimischen Führern und entdecken Sie verborgene Wasserfälle.',
+    exp4_title: 'Tierbeobachtung', exp4_desc: 'Beobachten Sie Tukane, Scharlachara, Brüllaffen und über 100 Vogelarten von Ihrem Dom aus.',
+    exp5_title: 'Flussschwimmen', exp5_desc: 'Schwimmen Sie im ikonischen türkisfarbenen Wasser des Rio Celeste — einem der einzigartigsten Flüsse der Welt.',
+    exp6_title: 'Lokale Küche', exp6_desc: 'Erkunden Sie die vielen lokalen Restaurants in der Nähe mit frischer costaricanischer Küche.',
+    loc_label: 'Finden Sie Uns', loc_headline: 'Im Herzen von Allem', loc_cta: 'Wegbeschreibung →',
+    loc_highlights: 'Warum die Lage Magisch Ist',
+    loc_p1_title: 'Nationalpark Tenorio-Vulkan', loc_p1_desc: 'Nur 1,6 km entfernt — Heimat des berühmten blauen Wasserfalls des Rio Celeste.',
+    loc_p2_title: 'Rio Celeste', loc_p2_desc: 'Der weltberühmte türkisfarbene Fluss liegt nur Minuten von Ihrem Dom entfernt.',
+    loc_p3_title: 'Tiefer Dschungel', loc_p3_desc: 'Umgeben von Primärregenwald mit atemberaubendem Bergblick, reichhaltigem Tierleben und absoluter Ruhe.',
+    loc_p4_title: 'Lokale Restaurants', loc_p4_desc: 'Mehrere großartige lokale Restaurants in kurzer Fahrtzeit mit authentischen costaricanischen Aromen.',
+    gallery_label: 'Visuelle Reise', gallery_headline: 'Die Magie Sehen',
+    g1:'Dom bei Sonnenaufgang',g2:'Rio Celeste',g3:'Dschungeldach',g4:'Morgennebel',g5:'Tierwelt',g6:'Bergblick',g7:'Die Hütte',g8:'Sternbeobachtung',g9:'Lokales Abenteuer',
+    testi_label: 'Gästestimmen', testi_headline: 'Was Gäste Sagen',
+    book_label: 'Aufenthalt Reservieren', book_headline: 'Starten Sie Ihr Abenteuer',
+    book_sub: 'Füllen Sie das Formular aus und wir bestätigen Ihre Buchung innerhalb von 24 Stunden.',
+    form_name:'Vollständiger Name *', form_email:'E-Mail-Adresse *', form_phone:'Telefon (optional)', form_guests:'Anzahl der Gäste *',
+    form_checkin:'Anreisedatum *', form_checkout:'Abreisedatum *', form_accom:'Bevorzugte Unterkunft *',
+    form_accom_placeholder:'Unterkunft auswählen...', form_opt1:'Deluxe Dom (8m) — $180/Nacht', form_opt2:'Explorer Dom (6m) — $140/Nacht', form_opt3:'Die Dschungelhütte — $220/Nacht',
+    form_message:'Besondere Wünsche oder Fragen', form_submit:'Anfrage Senden 🌿', form_note:'✓ Wir antworten innerhalb von 24 Stunden · Keine Zahlung für Anfragen nötig',
+    footer_tagline: 'Wo der Dschungel auf Luxus trifft. Geodätisches Dom-Glamping in der magischsten Ecke Costa Ricas.',
+    footer_nav:'Navigation', footer_contact:'Kontakt', footer_lang:'Sprache',
+  },
+  fr: {
+    nav_about: 'À Propos', nav_accom: 'Hébergements', nav_exp: 'Expériences',
+    nav_loc: 'Localisation', nav_gallery: 'Galerie', nav_book: 'Réserver',
+    hero_badge: '🏔️ À 1,6 km du Parc National du Volcan Tenorio',
+    hero_headline: 'Où la Jungle<br/><em>Rencontre le Luxe</em>',
+    hero_sub: "Glamping en dômes géodésiques au cœur de la jungle la plus magique du Costa Rica — Rio Celeste, toucans et un ciel étoilé.",
+    hero_cta1: 'Découvrir les Dômes', hero_cta2: 'Réserver Votre Séjour',
+    about_label: 'Notre Histoire', about_headline: 'Un Autre Genre de Sauvage',
+    about_p1: "Niché dans les jungles luxuriantes du nord du Costa Rica, Rio Celeste Jungle Glamping est né d'une conviction simple : le luxe et la nature ne sont pas opposés — ils sont partenaires.",
+    about_p2: "Réveillez-vous au chant des toucans, endormez-vous avec l'orchestre de la jungle. Passez vos journées à cheval dans la canopée, à faire du tubing sur la légendaire rivière bleue.",
+    about_cta: 'Planifier Votre Évasion',
+    stat1_num: '3', stat1_label: 'Séjours Uniques', stat2_num: '100+', stat2_label: "Espèces d'Oiseaux", stat3_num: '0', stat3_label: 'Compromis',
+    accom_label: 'Où Vous Dormirez', accom_headline: 'Votre Maison dans la Jungle', accom_cta: 'Vérifier la Disponibilité',
+    dome1_name: 'Dôme Deluxe', dome1_desc: "La retraite romantique ultime. Plongez dans le luxe de la jungle avec un lit king, une terrasse privée et des vues à couper le souffle.",
+    dome2_name: 'Dôme Explorer', dome2_desc: "Votre bureau dans la jungle. WiFi rapide, espace de travail dédié et confort — parfait pour les nomades numériques.",
+    cabin_name: 'Le Chalet de la Jungle', cabin_desc: "Un foyer complet dans la jungle. Avec salon, cuisine complète, salle de bain accessible et terrasse privée avec vue sur les montagnes.",
+    exp_label: 'Activités', exp_headline: "Les Aventures Vous Attendent",
+    exp1_title: 'Équitation', exp1_desc: "Chevauchée à travers la canopée de la jungle sur des circuits guidés descendant vers la légendaire rivière Rio Celeste.",
+    exp2_title: 'Tubing sur la Rivière', exp2_desc: "Flottez sur les eaux turquoises du Rio Celeste lors d'une aventure de tubing exaltante.",
+    exp3_title: 'Randonnée en Jungle', exp3_desc: "Randonnez sur des sentiers ancestraux avec des guides locaux, découvrant des cascades cachées et des vues époustouflantes.",
+    exp4_title: 'Observation de la Faune', exp4_desc: "Observez toucans, aras écarlates, singes hurleurs et plus de 100 espèces d'oiseaux depuis votre dôme.",
+    exp5_title: 'Baignade en Rivière', exp5_desc: "Nagez dans les eaux turquoises emblématiques du Rio Celeste — l'une des rivières aux couleurs les plus uniques du monde.",
+    exp6_title: 'Cuisine Locale', exp6_desc: "Explorez les nombreux restaurants locaux à proximité, servant une cuisine costaricienne fraîche et de délicieux casados.",
+    loc_label: 'Nous Trouver', loc_headline: 'Au Cœur de Tout', loc_cta: 'Obtenir l\'Itinéraire →',
+    loc_highlights: 'Pourquoi l\'Emplacement Est Magique',
+    loc_p1_title: 'Parc National Volcan Tenorio', loc_p1_desc: "À seulement 1,6 km — demeure de la célèbre cascade bleue du Rio Celeste.",
+    loc_p2_title: 'Rio Celeste', loc_p2_desc: "La célèbre rivière turquoise est à quelques minutes de votre dôme.",
+    loc_p3_title: 'Cadre de Jungle Profonde', loc_p3_desc: "Entouré de forêt tropicale primaire avec de superbes vues sur les montagnes et une faune abondante.",
+    loc_p4_title: 'Restaurants Locaux', loc_p4_desc: "Plusieurs excellents restaurants locaux à courte distance en voiture avec des saveurs costariciennes authentiques.",
+    gallery_label: 'Voyage Visuel', gallery_headline: 'Voir la Magie',
+    g1:'Dôme au Lever du Soleil',g2:'Rio Celeste',g3:'Canopée de la Jungle',g4:'Brume Matinale',g5:'Faune',g6:'Vue sur la Montagne',g7:'Le Chalet',g8:'Observation des Étoiles',g9:'Aventure Locale',
+    testi_label: 'Voix des Clients', testi_headline: 'Ce que Disent nos Clients',
+    book_label: 'Réserver Votre Séjour', book_headline: 'Commencez Votre Aventure',
+    book_sub: "Remplissez le formulaire ci-dessous et nous confirmerons votre réservation dans les 24 heures.",
+    form_name:'Nom Complet *', form_email:'Adresse E-mail *', form_phone:'Téléphone (optionnel)', form_guests:'Nombre de Voyageurs *',
+    form_checkin:"Date d'Arrivée *", form_checkout:'Date de Départ *', form_accom:'Hébergement Préféré *',
+    form_accom_placeholder:'Choisir un hébergement...', form_opt1:'Dôme Deluxe (8m) — $180/nuit', form_opt2:'Dôme Explorer (6m) — $140/nuit', form_opt3:'Le Chalet de la Jungle — $220/nuit',
+    form_message:'Demandes Spéciales ou Questions', form_submit:'Envoyer la Demande 🌿', form_note:'✓ Nous répondons dans les 24 heures · Aucun paiement requis pour les demandes',
+    footer_tagline: "Où la jungle rencontre le luxe. Glamping en dômes géodésiques dans le coin le plus magique du Costa Rica.",
+    footer_nav:'Navigation', footer_contact:'Contact', footer_lang:'Langue',
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = t[key];
+      } else if (el.tagName === 'OPTION') {
+        el.textContent = t[key];
+      } else {
+        el.innerHTML = t[key];
+      }
+    }
+  });
+  // Update active lang button
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.textContent.toLowerCase().includes(lang) || btn.onclick?.toString().includes(`'${lang}'`)) {
+      btn.classList.add('active');
+    }
+  });
+  document.documentElement.lang = lang;
+}
+
+// ─── NAVBAR SCROLL ───
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 80) {
+    navbar.classList.remove('top');
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+    navbar.classList.add('top');
+  }
+});
+
+// ─── MOBILE MENU ───
+function toggleMobile() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.toggle('open');
+}
+
+// ─── SCROLL ANIMATIONS ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ─── FORM VALIDATION ───
+function validateForm() {
+  const name = document.getElementById('fullname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const checkin = document.getElementById('checkin').value;
+  const checkout = document.getElementById('checkout').value;
+  const accommodation = document.getElementById('accommodation').value;
+  const guests = document.getElementById('guests').value;
+
+  if (!name || !email || !checkin || !checkout || !accommodation || !guests) {
+    alert('Please fill in all required fields.');
+    return false;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Please enter a valid email address.');
+    return false;
+  }
+  if (new Date(checkout) <= new Date(checkin)) {
+    alert('Check-out date must be after check-in date.');
+    return false;
+  }
+  return true;
+}
+
+// ─── RESPONSIVE GRID FIX ───
+function fixGrids() {
+  const w = window.innerWidth;
+  document.querySelectorAll('[style*="grid-template-columns:1fr 1fr"]').forEach(el => {
+    if (w < 768) {
+      el.style.gridTemplateColumns = '1fr';
+    } else {
+      el.style.gridTemplateColumns = '1fr 1fr';
+    }
+  });
+  // Footer 4-col
+  const footer4 = document.querySelector('[style*="grid-template-columns:2fr 1fr 1fr 1fr"]');
+  if (footer4) {
+    footer4.style.gridTemplateColumns = w < 640 ? '1fr' : w < 1024 ? '1fr 1fr' : '2fr 1fr 1fr 1fr';
+  }
+}
+window.addEventListener('resize', fixGrids);
+fixGrids();
+</script>
+</body>
+</html>
