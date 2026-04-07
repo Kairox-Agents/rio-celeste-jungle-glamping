@@ -10,7 +10,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Josefin+Sans:wght@300;400;600&family=Inter:wght@200;300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -106,6 +106,32 @@
     }
     .btn-outline-cream:hover { border-color: #F2E8D0; background: rgba(242,232,208,0.08); transform: translateY(-2px); }
 
+    /* ── HERO MOCKUP PASS ── */
+    .hero-mock {
+      position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden;
+      background: #080f09;
+    }
+    .hero-mock-bg {
+      position: absolute; inset: 0; background: url('assets/mockup-hero/hero_dome.jpg') center 30%/cover no-repeat; transform: scale(1.04);
+    }
+    .hero-mock-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(8,15,9,0.25) 0%, rgba(8,15,9,0.1) 40%, rgba(8,15,9,0.7) 75%, rgba(8,15,9,1) 100%);
+    }
+    .hero-mock-wrap { position: relative; z-index: 2; max-width: 1280px; width: 100%; margin: 0 auto; padding: 0 80px 100px; }
+    .hero-mock-content { max-width: 780px; }
+    .hero-mock-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #38B8D8; margin-bottom: 24px; }
+    .hero-mock-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: #38B8D8; }
+    .hero-mock-h1 { font-family: 'Playfair Display', serif; font-size: clamp(52px, 7vw, 96px); font-weight: 400; line-height: 1.0; letter-spacing: -0.01em; margin-bottom: 28px; color: #fff; }
+    .hero-mock-h1 em { font-style: italic; color: #38B8D8; }
+    .hero-mock-sub { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.68); max-width: 440px; margin-bottom: 44px; line-height: 1.7; }
+    .hero-mock-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .hero-btn-primary { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #080f09; background: #38B8D8; border: none; padding: 16px 36px; border-radius: 2px; text-decoration: none; }
+    .hero-btn-ghost { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.7); background: transparent; border: 1px solid rgba(255,255,255,0.3); padding: 15px 36px; border-radius: 2px; text-decoration: none; }
+    .hero-stats-mock { position: absolute; right: 80px; bottom: 100px; z-index: 2; display: flex; flex-direction: column; gap: 28px; text-align: right; }
+    .hero-stat-num-mock { font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 200; letter-spacing: -0.02em; line-height: 1; color: #fff; }
+    .hero-stat-label-mock { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
     /* ── CARDS ── */
     .dome-card {
       background: linear-gradient(135deg, #0C1E11, #142C1A);
@@ -148,6 +174,13 @@
       .two-col { grid-template-columns: 1fr !important; }
       .three-col { grid-template-columns: 1fr !important; }
       .footer-grid { grid-template-columns: 1fr 1fr !important; }
+      .hero-mock-wrap { padding: 0 24px 72px; }
+      .hero-stats-mock { position: static; margin-top: 28px; flex-direction: row; gap: 20px; text-align: left; }
+      .hero-mock-content { max-width: 100%; }
+      .hero-mock-h1 { font-size: clamp(44px, 14vw, 68px); }
+      .hero-mock-sub { font-size: 15px; max-width: 100%; }
+      .hero-actions-mock { flex-direction: column; align-items: stretch; }
+      .hero-btn-primary, .hero-btn-ghost { text-align: center; width: 100%; }
     }
 
     /* ── VINE DECORATION ── */
@@ -265,171 +298,32 @@
 </nav>
 
 <!-- ═══════════ HERO ═══════════ -->
-<section id="hero">
-  <canvas id="firefly-canvas"></canvas>
-  <div class="hero-overlay"></div>
-
-  <!-- Vines from top -->
-  <div class="vine" style="top:0;left:6%;height:180px;--vine-h:180px;animation:vineDrop 2s ease forwards;"></div>
-  <div class="vine" style="top:0;right:8%;height:220px;--vine-h:220px;animation:vineDrop 2.5s ease forwards;animation-delay:0.5s;"></div>
-  <div class="vine" style="top:0;left:28%;height:140px;--vine-h:140px;animation:vineDrop 1.8s ease forwards;animation-delay:0.3s;opacity:0.5;"></div>
-  <div class="vine" style="top:0;right:30%;height:160px;--vine-h:160px;animation:vineDrop 2.2s ease forwards;animation-delay:0.8s;opacity:0.5;"></div>
-
-  <div style="max-width:1280px;margin:0 auto;padding:6rem 2rem 4rem;position:relative;z-index:10;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;" class="two-col">
-    <!-- Text -->
-    <div style="animation:fadeUp 1s ease forwards;">
-      <div class="badge-celeste" style="margin-bottom:2rem;">
-        <span style="color:#38B8D8;font-size:0.85rem;">🏔️</span>
-        <span class="label-caps" style="color:#38B8D8;font-size:0.65rem;" data-i18n="hero_badge">1 Mile · Tenorio Volcano National Park</span>
-      </div>
-      <h1 class="display" style="font-size:clamp(3rem,6vw,5.5rem);font-weight:600;line-height:1.05;color:#F2E8D0;margin-bottom:1.5rem;" data-i18n="hero_headline">
-        Where the<br/><em style="color:#38B8D8;">Jungle</em><br/>Meets Luxury
-      </h1>
-      <p style="color:rgba(242,232,208,0.65);font-size:1.05rem;line-height:1.75;max-width:480px;margin-bottom:2.5rem;" data-i18n="hero_sub">
-        Geodesic dome glamping deep in the Costa Rican jungle. Toucans at dawn, howler monkeys overhead, Rio Celeste shimmering below.
-      </p>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-        <a href="#accommodations" class="btn-outline-cream" data-i18n="hero_cta1">Explore Domes</a>
-        <a href="#booking" class="btn-celeste" data-i18n="hero_cta2">Book Your Stay</a>
-      </div>
-      <!-- Stats row -->
-      <div style="display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.08);">
-        <div>
-          <div class="display" style="font-size:2.2rem;font-weight:700;color:#38B8D8;">3</div>
-          <div class="label-caps" style="color:rgba(242,232,208,0.45);font-size:0.6rem;" data-i18n="stat1">Unique Stays</div>
-        </div>
-        <div>
-          <div class="display" style="font-size:2.2rem;font-weight:700;color:#38B8D8;">100+</div>
-          <div class="label-caps" style="color:rgba(242,232,208,0.45);font-size:0.6rem;" data-i18n="stat2">Bird Species</div>
-        </div>
-        <div>
-          <div class="display" style="font-size:2.2rem;font-weight:700;color:#38B8D8;">∞</div>
-          <div class="label-caps" style="color:rgba(242,232,208,0.45);font-size:0.6rem;" data-i18n="stat3">Wild Moments</div>
-        </div>
+<section id="hero" class="hero-mock">
+  <div class="hero-mock-bg"></div>
+  <div class="hero-mock-wrap">
+    <div class="hero-mock-content">
+      <div class="hero-mock-eyebrow" data-i18n="hero_badge">1 Mile · Tenorio Volcano National Park</div>
+      <h1 class="hero-mock-h1" data-i18n="hero_headline">Where the<br/><em>Jungle</em><br/>Meets Luxury</h1>
+      <p class="hero-mock-sub" data-i18n="hero_sub">Geodesic dome glamping deep in the Costa Rican jungle. Toucans at dawn, howler monkeys overhead, Rio Celeste shimmering below.</p>
+      <div class="hero-actions-mock">
+        <a href="#accommodations" class="hero-btn-primary" data-i18n="hero_cta1">Explore Domes</a>
+        <a href="#booking" class="hero-btn-ghost" data-i18n="hero_cta2">Book Your Stay</a>
       </div>
     </div>
-
-    <!-- Toucan illustration -->
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;animation:fadeIn 1.5s ease forwards;animation-delay:0.4s;opacity:0;">
-      <!-- Toucan SVG -->
-      <svg viewBox="0 0 240 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px;filter:drop-shadow(0 20px 60px rgba(0,0,0,0.8));">
-        <!-- Branch -->
-        <path d="M20 240 Q120 232 220 240" stroke="#3D2210" stroke-width="16" fill="none" stroke-linecap="round"/>
-        <path d="M20 236 Q120 228 220 236" stroke="#5C3A18" stroke-width="7" fill="none" stroke-linecap="round"/>
-        <!-- leaves on branch -->
-        <ellipse cx="45" cy="234" rx="12" ry="5" fill="#1E4829" transform="rotate(-15,45,234)"/>
-        <ellipse cx="185" cy="236" rx="14" ry="5" fill="#1E4829" transform="rotate(10,185,236)"/>
-
-        <!-- Tail feathers -->
-        <path d="M165 205 Q188 215 182 238 Q170 232 170 215Z" fill="#0F1F14"/>
-        <path d="M172 202 Q198 215 190 240 Q176 234 176 216Z" fill="#CC2936" opacity="0.85"/>
-        <path d="M160 208 Q178 220 174 242 Q163 236 164 218Z" fill="#0A160E"/>
-
-        <!-- Body -->
-        <ellipse cx="148" cy="190" rx="48" ry="44" fill="#111A12"/>
-        <!-- Body highlight -->
-        <ellipse cx="135" cy="178" rx="30" ry="28" fill="#151E16"/>
-
-        <!-- Yellow/cream bib -->
-        <path d="M118 160 Q104 175 104 200 Q112 216 135 212 Q154 208 158 192 Q158 170 148 158 Q135 152 118 160Z" fill="#F0D828"/>
-        <!-- Warm red band at bottom of bib -->
-        <path d="M104 200 Q112 216 135 212 Q154 208 158 195 Q140 212 104 200Z" fill="#CC3020" opacity="0.65"/>
-
-        <!-- Head -->
-        <circle cx="128" cy="138" r="38" fill="#111A12"/>
-        <!-- Head highlight -->
-        <circle cx="120" cy="130" r="28" fill="#151E16"/>
-
-        <!-- Blue eye ring -->
-        <circle cx="112" cy="130" r="13" fill="#1890B0"/>
-        <circle cx="112" cy="130" r="10" fill="#0D6A88"/>
-        <!-- Eye -->
-        <circle cx="112" cy="130" r="7" fill="#060D08"/>
-        <!-- Eye shine -->
-        <circle cx="109" cy="127" r="2.5" fill="white" opacity="0.95"/>
-        <circle cx="114" cy="133" r="1.2" fill="white" opacity="0.5"/>
-
-        <!-- THE BILL — keel-billed toucan style (the star of the show) -->
-        <!-- Upper mandible base - yellow-green -->
-        <path d="M106 126 Q80 118 55 122 Q35 126 22 136 Q14 146 18 158 Q24 168 36 168 Q60 164 82 150 Q100 138 108 128Z" fill="#A8CC20"/>
-        <!-- Orange section -->
-        <path d="M80 118 Q58 116 44 120 Q34 124 28 130 Q38 124 54 122 Q70 120 82 122Z" fill="#E07022" opacity="0.95"/>
-        <!-- Red tip -->
-        <path d="M18 155 Q14 146 18 158 Q24 168 36 168 Q28 164 22 156 Q18 153 18 155Z" fill="#CC2020"/>
-        <!-- Lower mandible -->
-        <path d="M108 132 Q88 146 66 156 Q50 162 36 168 Q24 168 26 172 Q36 178 54 172 Q76 164 96 148 Q108 138 108 134Z" fill="#80AA18"/>
-        <!-- Bill outline/depth -->
-        <path d="M106 126 Q80 118 55 122 Q35 126 22 136 Q14 146 18 158 Q24 168 36 168 Q60 164 82 150 Q100 138 108 128Z" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"/>
-        <!-- Bill ridge line -->
-        <path d="M106 126 Q80 119 55 122 Q35 126 22 136" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" fill="none"/>
-
-        <!-- Nostril detail -->
-        <circle cx="95" cy="123" r="2" fill="rgba(0,0,0,0.35)"/>
-
-        <!-- Feet gripping branch -->
-        <path d="M132 232 L124 240 M132 232 L128 242 M132 232 L136 243 M132 232 L140 240" stroke="#3D3020" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <path d="M156 232 L148 240 M156 232 L152 242 M156 232 L160 243 M156 232 L164 240" stroke="#3D3020" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-        <!-- Wing detail -->
-        <path d="M108 185 Q150 175 190 190 Q180 200 145 205 Q118 205 108 195Z" fill="#0D160F" opacity="0.7"/>
-
-        <!-- Ambient glow around toucan -->
-        <ellipse cx="148" cy="260" rx="60" ry="10" fill="rgba(56,184,216,0.06)"/>
-      </svg>
-
-      <!-- Monkey hanging from vine in corner -->
-      <div style="position:absolute;top:120px;right:60px;display:flex;flex-direction:column;align-items:center;opacity:0.85;" class="hidden md:flex">
-        <div class="vine-rope" style="height:60px;"></div>
-        <div class="monkey-container">
-          <svg viewBox="0 0 60 80" width="55" style="filter:drop-shadow(0 4px 12px rgba(0,0,0,0.6));">
-            <!-- Tail wrapped on vine -->
-            <path d="M30 5 Q35 2 38 5" stroke="#3D2210" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <!-- Body -->
-            <ellipse cx="30" cy="38" rx="14" ry="16" fill="#2A1A08"/>
-            <!-- Chest (lighter) -->
-            <ellipse cx="30" cy="40" rx="9" ry="11" fill="#4A3018"/>
-            <!-- Head -->
-            <circle cx="30" cy="20" r="13" fill="#2A1A08"/>
-            <!-- Face (lighter oval) -->
-            <ellipse cx="30" cy="22" rx="8" ry="7" fill="#5A4028"/>
-            <!-- Eyes -->
-            <circle cx="26" cy="19" r="3" fill="#0A0505"/>
-            <circle cx="34" cy="19" r="3" fill="#0A0505"/>
-            <circle cx="25.5" cy="18.5" r="1" fill="white" opacity="0.8"/>
-            <circle cx="33.5" cy="18.5" r="1" fill="white" opacity="0.8"/>
-            <!-- Nostrils -->
-            <circle cx="28" cy="23" r="1.2" fill="#1A0A04"/>
-            <circle cx="32" cy="23" r="1.2" fill="#1A0A04"/>
-            <!-- Mouth -->
-            <path d="M27 26 Q30 28 33 26" stroke="#1A0A04" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-            <!-- Ears -->
-            <circle cx="17" cy="19" r="5" fill="#2A1A08"/><circle cx="17" cy="19" r="3" fill="#4A3018"/>
-            <circle cx="43" cy="19" r="5" fill="#2A1A08"/><circle cx="43" cy="19" r="3" fill="#4A3018"/>
-            <!-- Arms hanging -->
-            <path d="M17 35 Q10 45 12 55" stroke="#2A1A08" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <path d="M43 35 Q50 45 48 55" stroke="#2A1A08" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <!-- Hands -->
-            <circle cx="12" cy="56" r="4" fill="#2A1A08"/>
-            <circle cx="48" cy="56" r="4" fill="#2A1A08"/>
-            <!-- Legs -->
-            <path d="M24 53 Q20 64 22 72" stroke="#2A1A08" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <path d="M36 53 Q40 64 38 72" stroke="#2A1A08" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <!-- Feet -->
-            <circle cx="22" cy="73" r="4" fill="#2A1A08"/>
-            <circle cx="38" cy="73" r="4" fill="#2A1A08"/>
-            <!-- Prehensile tail -->
-            <path d="M40 50 Q54 55 55 45 Q56 35 48 34 Q42 33 40 38" stroke="#3D2810" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div style="font-family:'Josefin Sans',sans-serif;font-size:0.58rem;color:rgba(56,184,216,0.6);letter-spacing:0.15em;margin-top:4px;">HOWLER MONKEY</div>
+    <div class="hero-stats-mock">
+      <div>
+        <div class="hero-stat-num-mock">3</div>
+        <div class="hero-stat-label-mock" data-i18n="stat1">Unique Stays</div>
+      </div>
+      <div>
+        <div class="hero-stat-num-mock">100+</div>
+        <div class="hero-stat-label-mock" data-i18n="stat2">Bird Species</div>
+      </div>
+      <div>
+        <div class="hero-stat-num-mock">∞</div>
+        <div class="hero-stat-label-mock" data-i18n="stat3">Wild Moments</div>
       </div>
     </div>
-  </div>
-
-  <!-- Scroll hint -->
-  <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);text-align:center;z-index:10;animation:fadeIn 2s ease forwards;animation-delay:1.5s;opacity:0;">
-    <div class="label-caps" style="color:rgba(242,232,208,0.35);font-size:0.6rem;margin-bottom:0.5rem;">Scroll to explore</div>
-    <div style="width:1px;height:40px;background:linear-gradient(to bottom,rgba(56,184,216,0.4),transparent);margin:0 auto;"></div>
   </div>
 </section>
 
