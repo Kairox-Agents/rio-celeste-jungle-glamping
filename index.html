@@ -116,18 +116,29 @@
     }
     .hero-mock-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(8,15,9,0.25) 0%, rgba(8,15,9,0.1) 40%, rgba(8,15,9,0.7) 75%, rgba(8,15,9,1) 100%);
+      background:
+        linear-gradient(to bottom, rgba(8,15,9,0.22) 0%, rgba(8,15,9,0.08) 34%, rgba(8,15,9,0.66) 74%, rgba(8,15,9,1) 100%),
+        linear-gradient(90deg, rgba(8,15,9,0.86) 0%, rgba(8,15,9,0.62) 24%, rgba(8,15,9,0.28) 50%, rgba(8,15,9,0.12) 72%, rgba(8,15,9,0.18) 100%);
     }
     .hero-mock-wrap { position: relative; z-index: 2; max-width: 1280px; width: 100%; margin: 0 auto; padding: 0 80px 100px; }
     .hero-mock-content { max-width: 780px; }
+    .hero-mock-copy-shell { position: relative; display: inline-block; }
+    .hero-mock-copy-shell::before {
+      content: ''; position: absolute; inset: -20px -22px -18px -20px;
+      background: linear-gradient(180deg, rgba(8,15,9,0.18), rgba(8,15,9,0.42));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-radius: 8px; box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+      z-index: -1;
+    }
     .hero-mock-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #38B8D8; margin-bottom: 24px; }
     .hero-mock-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: #38B8D8; }
     .hero-mock-h1 { font-family: 'Playfair Display', serif; font-size: clamp(52px, 7vw, 96px); font-weight: 400; line-height: 1.0; letter-spacing: -0.01em; margin-bottom: 28px; color: #fff; }
     .hero-mock-h1 em { font-style: italic; color: #38B8D8; }
-    .hero-mock-sub { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.68); max-width: 440px; margin-bottom: 44px; line-height: 1.7; }
-    .hero-mock-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-    .hero-btn-primary { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #080f09; background: #38B8D8; border: none; padding: 16px 36px; border-radius: 2px; text-decoration: none; }
-    .hero-btn-ghost { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.7); background: transparent; border: 1px solid rgba(255,255,255,0.3); padding: 15px 36px; border-radius: 2px; text-decoration: none; }
+    .hero-mock-sub { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.82); text-shadow: 0 1px 2px rgba(0,0,0,0.35); max-width: 440px; margin-bottom: 30px; line-height: 1.7; }
+    .hero-mock-actions { display: flex; gap: 14px; align-items: stretch; flex-wrap: wrap; max-width: 560px; }
+    .hero-btn-primary { display:inline-flex; align-items:center; justify-content:center; min-height:50px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #080f09; background: #38B8D8; border: none; padding: 16px 28px; border-radius: 2px; text-decoration: none; }
+    .hero-btn-ghost { display:inline-flex; align-items:center; justify-content:center; min-height:50px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.82); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.34); padding: 15px 28px; border-radius: 2px; text-decoration: none; }
     .hero-stats-mock { position: absolute; right: 80px; bottom: 100px; z-index: 2; display: flex; flex-direction: column; gap: 28px; text-align: right; }
     .hero-stat-num-mock { font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 200; letter-spacing: -0.02em; line-height: 1; color: #fff; }
     .hero-stat-label-mock { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 4px; }
@@ -302,12 +313,14 @@
   <div class="hero-mock-bg"></div>
   <div class="hero-mock-wrap">
     <div class="hero-mock-content">
-      <div class="hero-mock-eyebrow" data-i18n="hero_badge">1 Mile · Tenorio Volcano National Park</div>
-      <h1 class="hero-mock-h1" data-i18n="hero_headline">Where the<br/><em>Jungle</em><br/>Meets Luxury</h1>
-      <p class="hero-mock-sub" data-i18n="hero_sub">Geodesic dome glamping deep in the Costa Rican jungle. Toucans at dawn, howler monkeys overhead, Rio Celeste shimmering below.</p>
-      <div class="hero-actions-mock">
-        <a href="#accommodations" class="hero-btn-primary" data-i18n="hero_cta1">Explore Domes</a>
-        <a href="#booking" class="hero-btn-ghost" data-i18n="hero_cta2">Book Your Stay</a>
+      <div class="hero-mock-copy-shell">
+        <div class="hero-mock-eyebrow" data-i18n="hero_badge">1 Mile · Tenorio Volcano National Park</div>
+        <h1 class="hero-mock-h1" data-i18n="hero_headline">Where the<br/><em>Jungle</em><br/>Meets Luxury</h1>
+        <p class="hero-mock-sub" data-i18n="hero_sub">Geodesic dome glamping deep in the Costa Rican jungle. Toucans at dawn, howler monkeys overhead, Rio Celeste shimmering below.</p>
+        <div class="hero-mock-actions">
+          <a href="#accommodations" class="hero-btn-primary" data-i18n="hero_cta1">Explore Domes</a>
+          <a href="#booking" class="hero-btn-ghost" data-i18n="hero_cta2">Book Your Stay</a>
+        </div>
       </div>
     </div>
     <div class="hero-stats-mock">
